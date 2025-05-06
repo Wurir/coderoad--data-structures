@@ -1,8 +1,55 @@
-const numbers = [1, 2, 3, 4, 5]
+const initCalculator = (function(){
 
-const numbersInString = numbers.join(' ')
-console.log(numbersInString); // 1 2 3 4 5
+const sumNumbersFromString = function(numbersInString){
+    const numbers = numbersInString.split(',')
+    let sum = 0
+    for(let i=0; i<numbers.length; i++){
+        const number = Number(numbers[i])
+        sum += number
+    }
+    return sum
+}
 
-const numbersFromString = numbersInString.split(' ')
-console.log(numbersFromString); // ['1', '2', '3', '4', '5']
+const renderResult = function(value){
 
+    const result = sumNumbersFromString(value)
+
+    if(Number.isNaN(result)){
+        return 'Error in input!'
+    }
+        return 'Sum is: ' + result
+}
+
+const render = function(){
+
+    const container = document.createElement('div')
+    container.className = "calculator"
+    const input = document.createElement('input')
+    const p = document.createElement('p')
+
+    p.innerText = renderResult(input.value)
+
+    input.addEventListener('input', ()=> {
+        p.innerText = renderResult(input.value)
+    })
+
+    container.appendChild(input)
+    container.appendChild(p)
+    return container
+}
+
+const init = function(containerSelector){
+    const container = document.querySelector(containerSelector)
+    if(!container){
+        console.error('Container not found in document!')
+    }
+
+    const app = render(container)
+    container.appendChild(app)
+}
+
+return init
+
+})()
+
+initCalculator('body')
