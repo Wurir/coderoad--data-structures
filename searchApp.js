@@ -1,3 +1,6 @@
+const initListApp = (function(){
+
+
 let appContainer = null
 let names = ['Ala', 'Ela']
 let searchPhrase = ''
@@ -117,4 +120,7 @@ const init = function(containerSelector){
     container.appendChild(app)
 }
 
-init('body')
+return init
+})()
+
+initListApp('body')
