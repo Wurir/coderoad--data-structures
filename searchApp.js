@@ -37,7 +37,8 @@ const renderNewNameInput = function(){
     input.setAttribute('placeholder', 'Add new name')
     button.innerText = 'ADD'
 
-    button.addEventListener('click', ()=> {
+    form.addEventListener('submit', (e)=> {
+        e.preventDefault()
         addName(input.value)
     })
 
