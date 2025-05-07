@@ -79,9 +79,9 @@ const renderSearchInput = function(){
 const renderSearchResult = function(){
     const p = document.createElement('p')
     if(nameExist(searchPhrase)){
-        p.innerText= 'Exists'
+        p.innerText= 'Search phrase in list exists'
     }else{
-        p.innerText = 'NOT exists'
+        p.innerText = "Search phrase in list doesn't exists"
     }
 
     return p
