@@ -4,6 +4,7 @@ let searchPhrase = ''
 let isSearchFocused = false
 
 const addName = function(newName){
+    if(!newName) return
     names = names.concat(newName)
     searchPhrase = ''
     render()
