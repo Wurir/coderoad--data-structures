@@ -1,9 +1,11 @@
 let appContainer = null
 let names = ['Ala', 'Ela']
 let searchPhrase = ''
+let isSearchFocused = false
 
 const addName = function(newName){
     names = names.concat(newName)
+    searchPhrase = ''
     render()
 }
 
@@ -51,12 +53,15 @@ const renderSearchInput = function(){
     input.setAttribute('placeholder', 'Search name')
     input.value = searchPhrase
 
-    setTimeout(function(){
-        input.focus()
-    }, 0)
+    if(isSearchFocused){
+        setTimeout(function(){
+            input.focus()
+        }, 0)
+    }
 
     input.addEventListener('input', ()=> {
         searchPhrase = input.value
+        isSearchFocused = true
         render()
     })
     
@@ -94,6 +99,8 @@ const render = function(){
     appContainer.appendChild(newNameInput)
     appContainer.appendChild(searchInput)
     appContainer.appendChild(searchResult)
+
+    isSearchFocused = false
 
     return appContainer
 }
