@@ -1,5 +1,6 @@
 let appContainer = null
 let names = ['Ala', 'Ela']
+let searchPhrase = ''
 
 const addName = function(newName){
     names = names.concat(newName)
@@ -48,6 +49,17 @@ const renderSearchInput = function(){
     const input = document.createElement('input')
 
     input.setAttribute('placeholder', 'Search name')
+    input.value = searchPhrase
+
+    setTimeout(function(){
+        input.focus()
+    }, 0)
+
+    input.addEventListener('input', ()=> {
+        searchPhrase = input.value
+        render()
+    })
+    
 
     div.appendChild(input)
 
@@ -56,7 +68,12 @@ const renderSearchInput = function(){
 
 const renderSearchResult = function(){
     const p = document.createElement('p')
-    p.innerText = 'result'
+    if(nameExist(searchPhrase)){
+        p.innerText= 'Exists'
+    }else{
+        p.innerText = 'NOT exists'
+    }
+
     return p
 }
 
@@ -72,7 +89,7 @@ const render = function(){
     const newNameInput = renderNewNameInput()
     const searchInput = renderSearchInput()
     const searchResult = renderSearchResult()
-
+    
     appContainer.appendChild(list)
     appContainer.appendChild(newNameInput)
     appContainer.appendChild(searchInput)
