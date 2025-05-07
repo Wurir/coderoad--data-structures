@@ -30,7 +30,7 @@ const renderList = function(){
 }
 
 const renderNewNameInput = function(){
-    const div = document.createElement('div')
+    const form = document.createElement('form')
     const input = document.createElement('input')
     const button = document.createElement('button')
 
@@ -41,10 +41,10 @@ const renderNewNameInput = function(){
         addName(input.value)
     })
 
-    div.appendChild(input)
-    div.appendChild(button)
+    form.appendChild(input)
+    form.appendChild(button)
 
-    return div
+    return form
 }
 
 const renderSearchInput = function(){
