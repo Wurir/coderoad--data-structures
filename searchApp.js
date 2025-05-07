@@ -1,7 +1,9 @@
+let appContainer = null
 let names = ['Ala', 'Ela']
 
 const addName = function(newName){
     names = names.concat(newName)
+    render()
 }
 
 const nameExist = function(name){
@@ -31,6 +33,10 @@ const renderNewNameInput = function(){
     input.setAttribute('placeholder', 'Add new name')
     button.innerText = 'ADD'
 
+    button.addEventListener('click', ()=> {
+        addName(input.value)
+    })
+
     div.appendChild(input)
     div.appendChild(button)
 
@@ -55,19 +61,24 @@ const renderSearchResult = function(){
 }
 
 const render = function(){
-    const div = document.createElement('div')
+    
+    if(!appContainer) {
+        appContainer = document.createElement('div')
+    }
+
+    appContainer.innerHTML = ''
 
     const list = renderList ()
     const newNameInput = renderNewNameInput()
     const searchInput = renderSearchInput()
     const searchResult = renderSearchResult()
 
-    div.appendChild(list)
-    div.appendChild(newNameInput)
-    div.appendChild(searchInput)
-    div.appendChild(searchResult)
+    appContainer.appendChild(list)
+    appContainer.appendChild(newNameInput)
+    appContainer.appendChild(searchInput)
+    appContainer.appendChild(searchResult)
 
-    return div
+    return appContainer
 }
 
 const init = function(containerSelector){
