@@ -1,20 +1,28 @@
-const names = ['Ala', 'Ola', 'Ela']
-const numbers = [1, 2, 3, 4, 5, 6, 7]
+const names1 = ['Ala', 'Ola']
+const names2 = ['Ela', 'Iza']
+const names3 = ['Marta', 'Maja']
 
-const checkIfArrayIncludes = function(array, needle){
-    for(let i=0; i<array.length; i++){
-        const item = array[i]
-        if(item === needle) return true
-    }
-    return false
-}
+const allNames = (
+    names1
+        .concat(names2)
+        .concat(names3)
+)
+console.log(allNames)
 
+const allNamesReverted = (
+    names3
+        .concat(names2)
+        .concat(names1)
+)
+console.log(allNamesReverted)
 
-console.log(checkIfArrayIncludes(names, 'Ala')) // true
-console.log(checkIfArrayIncludes(names, 'Iza')) // false
+const allNamesRevertedSecondTime = (
+    names3
+        .concat(names2)
+        .concat(names1)
+)
+console.log(allNamesReverted === allNamesRevertedSecondTime) // false
 
-console.log(names.indexOf('Ala') !== -1) // true 
-console.log(names.indexOf('Iza') !== -1) // false
-
-console.log(names.includes('Ala')) // true 
-console.log(names.includes('Iza')) // false
+// const allNamesPlusOneMore = allNames.concat(['Agata'])
+const allNamesPlusOneMore = allNames.concat('Agata')
+console.log(allNamesPlusOneMore)
