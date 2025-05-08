@@ -5,6 +5,9 @@ const makeHello = function(){
 }
 
 const hello1 = makeHello() // zwraca fn i przypisuje do zmiennej
-hello1()
+const hello2 = makeHello() 
 
-makeHello()() // zwraca i wywoluje funkcje 
+hello1()
+hello2()
+
+console.log(hello1 === hello2); // false
