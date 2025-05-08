@@ -6,5 +6,7 @@ const makeHello = function(){
     return hello
 }
 
-const hello1 = makeHello()
+const hello1 = makeHello() // zwraca fn i przypisuje do zmiennej
 hello1()
+
+makeHello()() // zwraca i wywoluje funkcje 
