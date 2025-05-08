@@ -1,41 +1,29 @@
-const numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+const names = ['Ala', 'Ola', 'Ela', 'Iza']
 
-let numbersMultiplied = []
-
-for (let i = 0; i < numbers.length; i++) {
-    const number = numbers[i]
-    const numberMultiplied = number * 2
-
-    numbersMultiplied = numbersMultiplied.concat(numberMultiplied)
+const appendArray = function (array, container) {
+    array.forEach(function (element) {
+        container.appendChild(element)
+    })
 }
 
-console.log(numbersMultiplied)
+const renderListItem = function (name) {
+    const li = document.createElement('li')
 
-const numbersMultipliedByMap = numbers.map(function (number) {
-    return number * 2
-})
+    li.style.color = 'blue'
 
-console.log(numbersMultipliedByMap)
+    li.innerText = name
 
-const myOwnMap = function (array, callback) {
-
-    let arrayMapped = []
-
-    for (let i = 0; i < array.length; i++) {
-        const element = array[i]
-        const index = i
-
-        const result = callback(element, index, array)
-
-        arrayMapped = arrayMapped.concat(result)
-    }
-
-    return arrayMapped
-
+    return li
 }
 
-const numbersMultipliedByMyOwnMap = myOwnMap(numbers, function (number) {
-    return number * 2
-})
+const toUpperCase = function (string) {
+    return string.toUpperCase()
+}
 
-console.log(numbersMultipliedByMyOwnMap)
+const namesElements = (
+    names
+        .map(toUpperCase)
+        .map(renderListItem)
+)
+
+appendArray(namesElements, document.body) 
