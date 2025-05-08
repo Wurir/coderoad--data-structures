@@ -1,29 +1,21 @@
 const names = ['Ala', 'Ola', 'Ela', 'Iza']
 
-const appendArray = function (array, container) {
-    array.forEach(function (element) {
-        container.appendChild(element)
+const namesWithoutElement = names.filter(function (element, index, array) {
+    return element !== 'Ela'
+})
+
+console.log(namesWithoutElement)
+
+const removeArrayElement = function (array, indexToRemove) {
+    return array.filter(function (element, index, array) {
+        return index !== indexToRemove
     })
 }
 
-const renderListItem = function (name) {
-    const li = document.createElement('li')
+const namesWithoutElement2 = removeArrayElement(names, 2)
 
-    li.style.color = 'blue'
+console.log(namesWithoutElement2)
 
-    li.innerText = name
+const namesWithoutElement3 = removeArrayElement(names, names.indexOf('Ela'))
 
-    return li
-}
-
-const toUpperCase = function (string) {
-    return string.toUpperCase()
-}
-
-const namesElements = (
-    names
-        .map(toUpperCase)
-        .map(renderListItem)
-)
-
-appendArray(namesElements, document.body) 
+console.log(namesWithoutElement3)
