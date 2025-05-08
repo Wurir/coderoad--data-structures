@@ -11,3 +11,14 @@ hello1()
 hello2()
 
 console.log(hello1 === hello2); // false
+
+const callWithNumber2 = function(fn){
+    return fn(2)
+}
+
+const add2 = function(x){
+    return x + 2
+}
+
+const sum = callWithNumber2(add2)
+console.log(sum);
