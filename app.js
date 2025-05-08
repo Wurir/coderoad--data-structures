@@ -1,9 +1,7 @@
-const hello = function(){
-    console.log('Hello')
-}
-
 const makeHello = function(){
-    return hello
+    return function(){
+        console.log('Hello')
+    }
 }
 
 const hello1 = makeHello() // zwraca fn i przypisuje do zmiennej
