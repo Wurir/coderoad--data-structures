@@ -1,73 +1,36 @@
-const names = ['Ala', 'Ola', 'Ela', 'Iza', 'Mateusz']
-let searchPhrase = ''
+const names = ['Ala', 'Ola', 'Ela']
 
-const appendArray = function (array, container) {
-    array.forEach(function (element) {
-        container.appendChild(element)
-    })
+const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+
+const findByValue = function (value) {
+    return function (element, index, array) {
+        return element === value
+    }
 }
 
-const renderListItem = function (name) {
-    const li = document.createElement('li')
+const foundElement = names.find(findByValue('Ala'))
 
-    li.innerText = name
+console.log(foundElement)
 
-    return li
-}
+const myOwnFind = function (array, callback) {
 
-const renderList = function (names) {
+    for (let i = 0; i < array.length; i++) {
+        const element = array[i]
+        const index = i
 
-    const listContainer = document.createElement('ul')
+        const result = callback(element, index, array)
 
-    const listItems = names.map(renderListItem)
-
-    appendArray(listItems, listContainer)
-
-    return listContainer
-
-}
-
-const renderForm = function (searchPhrase, onInput) {
-
-    const form = document.createElement('form')
-    const input = document.createElement('input')
-
-    input.value = searchPhrase
-    
-    setTimeout(
-        function(){ input.focus() },
-        0
-    )
-
-    input.addEventListener(
-        'input',
-        onInput
-    )
-
-    form.appendChild(input)
-
-    return form
-}
-
-const render = function (rootContainer) {
-
-    rootContainer.innerHTML = ''
-
-    const onInput = function (event) {
-        searchPhrase = event.target.value
-        render(rootContainer)
+        if (result) {
+            return element
+        }
     }
 
-    const filteredNames = names.filter(function (name) {
-        return name.includes(searchPhrase)
-    })
-
-    const formElement = renderForm(searchPhrase, onInput)
-    const listElement = renderList(filteredNames)
-
-    rootContainer.appendChild(formElement)
-    rootContainer.appendChild(listElement)
-
 }
 
-render(document.body)
+const foundElementByMyOwnFind = myOwnFind(names, findByValue('Ala'))
+
+console.log(foundElementByMyOwnFind)
+
+const foundNumber = numbers.find(findByValue(3))
+
+console.log(foundNumber)
