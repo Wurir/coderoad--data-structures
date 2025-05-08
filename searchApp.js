@@ -13,19 +13,45 @@ const addName = function(newName){
     render()
 }
 
+const removeElement = function(array, indexToRemove){
+    const head = array.slice(0, indexToRemove)
+    const tail = array.slice(indexToRemove + 1)
+
+    return head.concat(tail)  
+}
+
+const removeName = function(indexToRemove){
+    names = removeElement(names, indexToRemove)
+
+    render()
+}
+
 const nameExist = function(name){
     return names.includes(name)
+}
+
+const renderListItem = function(name, index){
+    const li = document.createElement('li')
+    const button = document.createElement('button')
+    const text = document.createTextNode(name)
+    
+    button.innerText = 'X'
+    button.addEventListener('click', ()=>{
+        removeName(index)
+    })
+
+    li.appendChild(button)
+    li.appendChild(text)
+
+    return li
+
 }
 
 const renderList = function(){
     const ul = document.createElement('ul')
 
     for(let i=0; i<names.length; i++){
-
-        const li = document.createElement('li')
-
-        li.innerText = names[i]
-
+        const li = renderListItem(names[i], i)
         ul.appendChild(li)
     }
 
