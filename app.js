@@ -1,73 +1,60 @@
-const numbers = [-5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5]
-const names = ['Ala', 'Ola', 'Ola', "Ela"]
+const people = [
+    { name: 'Ala', age: 25, work: { experience: 3, salary: 4010 }, city: 'Lublin', favoriteColors: ['green', 'yellow'] },
+    { name: 'Ola', age: 21, work: { experience: 3, salary: 5100 }, city: 'Warszawa', favoriteColors: ['black', 'yellow'] },
+    { name: 'Ela', age: 28, work: { experience: 1, salary: 1600 }, city: 'Gdańsk', favoriteColors: ['green'] },
+    { name: 'Iza', age: 24, work: { experience: 5, salary: 6020 }, city: 'Lublin', favoriteColors: ['white', 'red'] },
+]
 
-const forEachResult = names.forEach(function (element, index, array) {
-    console.log(element)
-})
+let sum = 0
 
-console.log(forEachResult)
+for (let i = 0; i < people.length; i++) {
 
-const reduceForEachResult = names.reduce(
-    function (reduced, element, index, array) {
-        console.log(element)
-    },
-    ''
+    const person = people[i]
+
+    if (
+        (person && person.city) === 'Lublin' &&
+        (person && person.work && person.work.experience) > 2
+    ) {
+        sum = sum + ((person && person.work && person.work.salary) || 0)
+    }
+
+}
+
+console.log(sum)
+
+const filterByCity = function (city) {
+    return function (person) {
+        return (person && person.city) === city
+    }
+}
+const filterByWorkExperience = function (experience) {
+    return function (person) {
+        return (person && person.work && person.work.experience) > experience
+    }
+}
+const sumSalaries = function (reduced, person) {
+    return reduced + ((person && person.work && person.work.salary) || 0)
+}
+
+const salaries1 = (
+    people
+        .filter(filterByCity('Lublin'))
+        .filter(filterByWorkExperience(2))
+        .reduce(sumSalaries, 0)
+)
+const salaries2 = (
+    people
+        .filter(filterByCity('Gdańsk'))
+        .filter(filterByWorkExperience(2))
+        .reduce(sumSalaries, 0)
+)
+const salaries3 = (
+    people
+        .filter(filterByCity('Warszawa'))
+        .filter(filterByWorkExperience(2))
+        .reduce(sumSalaries, 0)
 )
 
-console.log(reduceForEachResult)
-
-const mapResult = numbers.map(function (element, index, array) {
-    return element * 2
-})
-
-console.log(mapResult)
-
-const reduceMapResult = numbers.reduce(
-    function (reduced, element, index, array) {
-        const newElement = element * 2
-
-        return reduced.concat(newElement)
-    },
-    []
-)
-
-console.log(reduceMapResult)
-
-const filterResult = numbers.filter(function (element, index, array) {
-    return element % 2 === 0
-})
-
-console.log(filterResult)
-
-const reduceFilterResult = numbers.reduce(
-    function (reduced, element, index, array) {
-        if (element % 2 === 0) {
-            return reduced.concat(element)
-        }
-        return reduced
-    },
-    []
-)
-
-console.log(reduceFilterResult)
-
-const findResult = names.find(function (element, index, array) {
-    return element === 'Ola'
-})
-
-console.log(findResult)
-
-const reduceFindResult = names.reduce(
-    function (reduced, element, index, array) {
-        if (reduced) return reduced
-        
-        if (element === 'Ola') {
-            return element
-        }
-
-        return reduced
-    },
-    undefined
-)
-
-console.log(reduceFindResult)
+console.log(salaries1)
+console.log(salaries2)
+console.log(salaries3)
