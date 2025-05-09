@@ -1,37 +1,47 @@
 const people = [
-    { name: 'Ala', age: 25, work: { experience: 3, salary: 4010 }, city: 'Lublin', favoriteColors: ['green', 'yellow'] },
-    { name: 'Ola', age: 21, work: { experience: 3, salary: 5100 }, city: 'Warszawa', favoriteColors: ['black', 'yellow'] },
-    { name: 'Ela', age: 28, work: { experience: 1, salary: 1600 }, city: 'Gdańsk', favoriteColors: ['green'] },
-    { name: 'Iza', age: 24, work: { experience: 5, salary: 6020 }, city: 'Lublin', favoriteColors: ['white', 'red'] },
+    { id: '00001', name: 'Ala', age: 25 },
+    { id: '00002', name: 'Ola', age: 21 },
+    { id: '00003', name: 'Ela', age: 28 },
+    { id: '00004', name: 'Iza', age: 24 },
 ]
 
-const allFavoriteColors = people.flatMap(function (person) { return person.favoriteColors })
+const peopleObject = {
+    '00001': { name: 'Ala', age: 25 },
+    '00002': { name: 'Ola', age: 21 },
+    '00003': { name: 'Ela', age: 28 },
+    '00004': { name: 'Iza', age: 24 },
+}
 
-console.log(allFavoriteColors)
+people.forEach(function(person){ console.log(person) })
 
-const removeDuplicates = function (array) {
+for (const property in peopleObject) {
 
-    let arrayWithoutDuplicates = []
+    const value = peopleObject[property]
 
-    for (let i = 0; i < array.length; i++) {
-        const element = array[i]
+    console.log(property)
+    console.log(value)
 
-        if (!arrayWithoutDuplicates.includes(element)) {
-            arrayWithoutDuplicates = arrayWithoutDuplicates.concat(element)
-        }
+}
+
+const objectToArray = function (object, idPropertyName = 'id') {
+
+    let arrayFromObject = []
+
+    for (const property in object) {
+
+        const value = object[property]
+        value[idPropertyName] = property
+
+        arrayFromObject = arrayFromObject.concat(value)
+
     }
 
-    return arrayWithoutDuplicates
+    return arrayFromObject
 
 }
 
-console.log(removeDuplicates(allFavoriteColors))
+const peopleArrayFromObject = objectToArray(peopleObject, 'key')
 
-const filterDuplicates = function (color, index, array) {
-    return array.indexOf(color) === index
-}
+console.log(peopleArrayFromObject)
 
-console.log(
-    allFavoriteColors
-        .filter(filterDuplicates)
-)
+peopleArrayFromObject.forEach(function (person) { console.log(person) })
