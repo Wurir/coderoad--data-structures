@@ -5,56 +5,37 @@ const people = [
     { name: 'Iza', age: 24, work: { experience: 5, salary: 6020 }, city: 'Lublin', favoriteColors: ['white', 'red'] },
 ]
 
-let sum = 0
+const names = ['Ala', 'Ola', 'Ela']
 
-for (let i = 0; i < people.length; i++) {
+const numbers = [-1, 10, -100, 3, 4, 1, 11, 15, 20, 21, 0]
 
-    const person = people[i]
+const sortDescending = function (a, b) { return b - a }
+const sortAscending = function (a, b) { return a - b }
 
-    if (
-        (person && person.city) === 'Lublin' &&
-        (person && person.work && person.work.experience) > 2
-    ) {
-        sum = sum + ((person && person.work && person.work.salary) || 0)
-    }
-
-}
-
-console.log(sum)
-
-const filterByCity = function (city) {
-    return function (person) {
-        return (person && person.city) === city
-    }
-}
-const filterByWorkExperience = function (experience) {
-    return function (person) {
-        return (person && person.work && person.work.experience) > experience
-    }
-}
-const sumSalaries = function (reduced, person) {
-    return reduced + ((person && person.work && person.work.salary) || 0)
-}
-
-const salaries1 = (
-    people
-        .filter(filterByCity('Lublin'))
-        .filter(filterByWorkExperience(2))
-        .reduce(sumSalaries, 0)
-)
-const salaries2 = (
-    people
-        .filter(filterByCity('Gdańsk'))
-        .filter(filterByWorkExperience(2))
-        .reduce(sumSalaries, 0)
-)
-const salaries3 = (
-    people
-        .filter(filterByCity('Warszawa'))
-        .filter(filterByWorkExperience(2))
-        .reduce(sumSalaries, 0)
+const numberSorted = (
+    numbers
+        .slice()
+        .sort(sortDescending)
 )
 
-console.log(salaries1)
-console.log(salaries2)
-console.log(salaries3)
+console.log(numberSorted)
+
+const peopleByAge = (
+    people
+        .slice()
+        .sort(function (personA, personB) {
+            return sortAscending(personA.age, personB.age)
+        })
+)
+
+console.log(peopleByAge)
+
+const peopleBySalary = (
+    people
+        .slice()
+        .sort(function (personA, personB) {
+            return sortAscending(personA.work.salary, personB.work.salary)
+        })
+)
+
+console.log(peopleBySalary)
