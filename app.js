@@ -1,10 +1,3 @@
-const people = [
-    { id: '00001', name: 'Ala', age: 25 },
-    { id: '00002', name: 'Ola', age: 21 },
-    { id: '00003', name: 'Ela', age: 28 },
-    { id: '00004', name: 'Iza', age: 24 },
-]
-
 const peopleObject = {
     '00001': { name: 'Ala', age: 25 },
     '00002': { name: 'Ola', age: 21 },
@@ -12,36 +5,50 @@ const peopleObject = {
     '00004': { name: 'Iza', age: 24 },
 }
 
-people.forEach(function(person){ console.log(person) })
-
-for (const property in peopleObject) {
-
-    const value = peopleObject[property]
-
-    console.log(property)
-    console.log(value)
-
+const namesObject = {
+    '00001': 'Ala',
+    '00002': 'Ola',
+    '00003': 'Ela',
+    '00004': 'Iza',
 }
 
-const objectToArray = function (object, idPropertyName = 'id') {
+const keys = Object.keys(peopleObject)
 
-    let arrayFromObject = []
+console.log(keys)
 
-    for (const property in object) {
+const values = Object.values(peopleObject)
 
-        const value = object[property]
-        value[idPropertyName] = property
+console.log("values", values)
 
-        arrayFromObject = arrayFromObject.concat(value)
+const entries = Object.entries(peopleObject)
 
-    }
+console.log("entries", entries)
 
-    return arrayFromObject
+const objectToArray = function (object, keyPropertyName = 'id') {
+    return (
+        Object
+            .entries(object || {})
+            .map(function (entry) {
 
+                const key = entry[0]
+                const value = entry[1]
+
+                if (typeof value === 'object') {
+                    value[keyPropertyName] = key
+                    return value
+                }
+
+                return {
+                    [keyPropertyName]: key,
+                    value: value,
+                }
+
+            })
+    )
 }
 
-const peopleArrayFromObject = objectToArray(peopleObject, 'key')
+console.log(objectToArray(peopleObject))
 
-console.log(peopleArrayFromObject)
+console.log(objectToArray(namesObject))
 
-peopleArrayFromObject.forEach(function (person) { console.log(person) })
+console.log(objectToArray(null))
