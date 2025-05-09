@@ -1,54 +1,26 @@
-const peopleObject = {
-    '00001': { name: 'Ala', age: 25 },
-    '00002': { name: 'Ola', age: 21 },
-    '00003': { name: 'Ela', age: 28 },
-    '00004': { name: 'Iza', age: 24 },
-}
+const people = [
+    { key: '00001', name: 'Ala', age: 25 },
+    { key: '00002', name: 'Ola', age: 21 },
+    { key: '00003', name: 'Ela', age: 28 },
+    { key: '00004', name: 'Iza', age: 24 },
+]
 
-const namesObject = {
-    '00001': 'Ala',
-    '00002': 'Ola',
-    '00003': 'Ela',
-    '00004': 'Iza',
-}
+const arrayToObject = function (array, keyPropertyName = 'id') {
+    return array.reduce(
+        function (reduced, person, index, array) {
+            const key = person[keyPropertyName]
+            const value = person
 
-const keys = Object.keys(peopleObject)
+            delete value[keyPropertyName]
 
-console.log(keys)
+            reduced[key] = value
 
-const values = Object.values(peopleObject)
-
-console.log("values", values)
-
-const entries = Object.entries(peopleObject)
-
-console.log("entries", entries)
-
-const objectToArray = function (object, keyPropertyName = 'id') {
-    return (
-        Object
-            .entries(object || {})
-            .map(function (entry) {
-
-                const key = entry[0]
-                const value = entry[1]
-
-                if (typeof value === 'object') {
-                    value[keyPropertyName] = key
-                    return value
-                }
-
-                return {
-                    [keyPropertyName]: key,
-                    value: value,
-                }
-
-            })
+            return reduced
+        },
+        {}
     )
 }
 
-console.log(objectToArray(peopleObject))
+const peopleObject = arrayToObject(people, 'key')
 
-console.log(objectToArray(namesObject))
-
-console.log(objectToArray(null))
+console.log(peopleObject)
