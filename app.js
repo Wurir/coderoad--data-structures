@@ -5,18 +5,33 @@ const people = [
     { name: 'Iza', age: 24, work: { experience: 5, salary: 6020 }, city: 'Lublin', favoriteColors: ['white', 'red'] },
 ]
 
-const allFavoriteColors = people.map(function (person) { return person.favoriteColors })
+const allFavoriteColors = people.flatMap(function (person) { return person.favoriteColors })
 
-const allFavoriteColorsFlatten = allFavoriteColors.flat()
+console.log(allFavoriteColors)
 
-console.log(allFavoriteColorsFlatten)
+const removeDuplicates = function (array) {
+
+    let arrayWithoutDuplicates = []
+
+    for (let i = 0; i < array.length; i++) {
+        const element = array[i]
+
+        if (!arrayWithoutDuplicates.includes(element)) {
+            arrayWithoutDuplicates = arrayWithoutDuplicates.concat(element)
+        }
+    }
+
+    return arrayWithoutDuplicates
+
+}
+
+console.log(removeDuplicates(allFavoriteColors))
+
+const filterDuplicates = function (color, index, array) {
+    return array.indexOf(color) === index
+}
 
 console.log(
-    people
-        .map(function (person) { return person.favoriteColors })
-        .flat()
-)
-
-console.log(
-    people.flatMap(function (person) { return person.favoriteColors })
+    allFavoriteColors
+        .filter(filterDuplicates)
 )
