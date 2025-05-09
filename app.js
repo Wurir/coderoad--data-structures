@@ -5,37 +5,18 @@ const people = [
     { name: 'Iza', age: 24, work: { experience: 5, salary: 6020 }, city: 'Lublin', favoriteColors: ['white', 'red'] },
 ]
 
-const names = ['Ala', 'Ola', 'Ela']
+const allFavoriteColors = people.map(function (person) { return person.favoriteColors })
 
-const numbers = [-1, 10, -100, 3, 4, 1, 11, 15, 20, 21, 0]
+const allFavoriteColorsFlatten = allFavoriteColors.flat()
 
-const sortDescending = function (a, b) { return b - a }
-const sortAscending = function (a, b) { return a - b }
+console.log(allFavoriteColorsFlatten)
 
-const numberSorted = (
-    numbers
-        .slice()
-        .sort(sortDescending)
-)
-
-console.log(numberSorted)
-
-const peopleByAge = (
+console.log(
     people
-        .slice()
-        .sort(function (personA, personB) {
-            return sortAscending(personA.age, personB.age)
-        })
+        .map(function (person) { return person.favoriteColors })
+        .flat()
 )
 
-console.log(peopleByAge)
-
-const peopleBySalary = (
-    people
-        .slice()
-        .sort(function (personA, personB) {
-            return sortAscending(personA.work.salary, personB.work.salary)
-        })
+console.log(
+    people.flatMap(function (person) { return person.favoriteColors })
 )
-
-console.log(peopleBySalary)
