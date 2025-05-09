@@ -1,35 +1,73 @@
-const numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+const numbers = [-5, -4, -3, -2, -1, 0, 1, 2, 3, 4, 5]
+const names = ['Ala', 'Ola', 'Ola', "Ela"]
 
-const sumOfArray = function (reduced, element, index, array) {
-    return reduced + element
-}
+const forEachResult = names.forEach(function (element, index, array) {
+    console.log(element)
+})
 
-const sum = numbers.reduce(sumOfArray, 0)
+console.log(forEachResult)
 
-const sum2 = numbers.reduce((acc, number)=> {
-    return acc + number
-}, 0)
+const reduceForEachResult = names.reduce(
+    function (reduced, element, index, array) {
+        console.log(element)
+    },
+    ''
+)
 
-console.log(sum)
-console.log(sum2)
+console.log(reduceForEachResult)
 
+const mapResult = numbers.map(function (element, index, array) {
+    return element * 2
+})
 
-const myOwnReduce = function (array, callback, initialValue) {
+console.log(mapResult)
 
-    let reduced = initialValue
+const reduceMapResult = numbers.reduce(
+    function (reduced, element, index, array) {
+        const newElement = element * 2
 
-    for(let i = 0; i < array.length; i++){
-        const element = array[i]
-        const index = i
+        return reduced.concat(newElement)
+    },
+    []
+)
 
+console.log(reduceMapResult)
 
-        reduced = callback(reduced, element, index, array)
-    }
+const filterResult = numbers.filter(function (element, index, array) {
+    return element % 2 === 0
+})
 
-    return reduced
+console.log(filterResult)
 
-}
+const reduceFilterResult = numbers.reduce(
+    function (reduced, element, index, array) {
+        if (element % 2 === 0) {
+            return reduced.concat(element)
+        }
+        return reduced
+    },
+    []
+)
 
-const sumByMyOwnReduce = myOwnReduce(numbers, sumOfArray, 0)
+console.log(reduceFilterResult)
 
-console.log(sumByMyOwnReduce)
+const findResult = names.find(function (element, index, array) {
+    return element === 'Ola'
+})
+
+console.log(findResult)
+
+const reduceFindResult = names.reduce(
+    function (reduced, element, index, array) {
+        if (reduced) return reduced
+        
+        if (element === 'Ola') {
+            return element
+        }
+
+        return reduced
+    },
+    undefined
+)
+
+console.log(reduceFindResult)
